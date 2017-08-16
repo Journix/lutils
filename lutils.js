@@ -29,5 +29,22 @@ var lutils = {
             }
         }
         return newArr
+    },
+    /**
+     * 判断一个对象是否是数组
+     * @param  {[type]}  arg [description]
+     * @return {Boolean}     [description]
+     */
+    isArray: function (arg) {
+        //如果浏览器支持Array.isArray()可以直接判断
+        if (typeof Array.isArray === 'function') {
+            return Array.isArray(arg);
+        } else {
+            if (typeof arg === 'object') {
+                return Object.prototype.toString.call(arg) === '[object Array]';
+            }
+                return false;
+            }
+        }
     }
 }
