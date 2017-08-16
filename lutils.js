@@ -9,7 +9,7 @@ var lutils = {
      * @param  {[type]} arr [description]
      * @return {[type]}     [description]
      */
-    sort1: function (arr) {
+    sort1: function(arr) {
         var a = array.filter(function(ele, index) {
             return index === array.indexOf(ele);
         })
@@ -19,7 +19,7 @@ var lutils = {
      * @param  {[type]} arr [description]
      * @return {[type]}     [description]
      */
-    sort: function (arr) {
+    sort: function(arr) {
         var result = {};
         var newArr = [];
         for (var i = 0; i < arr.length; i++)　 {
@@ -31,11 +31,79 @@ var lutils = {
         return newArr
     },
     /**
+     * 冒泡排序
+     * @param  {[type]} arr [description]
+     * @return {[type]}     [description]
+     */
+    bubbleSort: function(arr) {
+        var len = array.length;
+        for (var i = 0; i < len; i++) {
+            for (var j = 0; j < len - 1 - i; j++) {
+                if (array[j] > array[j + 1]) {
+                    d = array[j + 1];
+                    array[j + 1] = array[j];
+                    array[j] = d;
+                }
+            }
+        }
+        return array;
+    },
+    /**
+     * 选择排序
+     * @param  {[type]} arr [description]
+     * @return {[type]}     [description]
+     */
+    selectionSort: function(arr) {
+        var len = arr.length;
+        var minIndex, temp;
+        for (var i = 0; i < len - 1; i++) {
+            minIndex = i;
+            for (var j = i + 1; j < len; j++) {
+                if (arr[j] < arr[minIndex]) { //寻找最小的数
+                    minIndex = j; //将最小数的索引保存
+                }
+            }
+            temp = arr[i];
+            arr[i] = arr[minIndex];
+            arr[minIndex] = temp;
+        }
+        return arr;
+    },
+    /**
+     * 插入排序
+     * @param  {[type]} arr [description]
+     * @return {[type]}     [description]
+     */
+    insertionSort: function (arr) {
+        var len = arr.length;
+        var preIndex, current;
+        for (var i = 1; i < len; i++) {
+            preIndex = i - 1;
+            current = arr[i];
+            while (preIndex >= 0 && arr[preIndex] > current) {
+                arr[preIndex + 1] = arr[preIndex]; //往后推移一个
+                preIndex--;
+            }
+            arr[preIndex + 1] = current;
+        }
+        return arr;
+    },
+    /**
+     * 随机排序
+     * @param  {[type]} arr [description]
+     * @return {[type]}     [description]
+     */
+    randomSort: function (arr) {
+        return arr.sort(function(){
+            return Math.random() - 0.5
+        });
+    },
+    /**
      * 判断一个对象是否是数组
      * @param  {[type]}  arg [description]
      * @return {Boolean}     [description]
      */
-    isArray: function (arg) {
+    isArray: function(arg) {
         //如果浏览器支持Array.isArray()可以直接判断
         if (typeof Array.isArray === 'function') {
             return Array.isArray(arg);
