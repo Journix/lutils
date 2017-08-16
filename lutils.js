@@ -99,23 +99,6 @@ var lutils = {
         });
     },
     /**
-     * 判断一个对象是否是数组
-     * @param  {[type]}  arg [description]
-     * @return {Boolean}     [description]
-     */
-    isArray: function(arg) {
-        //如果浏览器支持Array.isArray()可以直接判断
-        if (typeof Array.isArray === 'function') {
-            return Array.isArray(arg);
-        } else {
-            if (typeof arg === 'object') {
-                return Object.prototype.toString.call(arg) === '[object Array]';
-            } else {
-                return false;
-            }
-        }
-    },
-    /**
      *
      * @param  {[type]} time [传入的时间值]
      * @param  {[type]} type [传入的时间类型]
