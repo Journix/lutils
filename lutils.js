@@ -99,7 +99,7 @@ var lutils = {
         });
     },
     /**
-     *
+     * 时间转换
      * @param  {[type]} time [传入的时间值]
      * @param  {[type]} type [传入的时间类型]
      * @return {[type]} lan  [输出语言形式]
@@ -156,5 +156,63 @@ var lutils = {
             }
         }
         return format;
+    },
+    /**
+     * 判断object是否拥有assign方法，如果不存在，就拓展该方法
+     * @return {Boolean} [description]
+     */
+    isObjHasAssign: function() {
+        if (!Object.assign) {
+            // 定义assign方法
+            Object.defineProperty(Object, 'assign', {
+                enumerable: false,
+                configurable: true,
+                writable: true,
+                value: function(target) { // assign方法的第一个参数
+                    'use strict';
+                    // 第一个参数为空，则抛错
+                    if (target === undefined || target === null) {
+                        throw new TypeError('Cannot convert first argument to object');
+                    }
+
+                    var to = Object(target);
+                    // 遍历剩余所有参数
+                    for (var i = 1; i < arguments.length; i++) {
+                        var nextSource = arguments[i];
+                        // 参数为空，则跳过，继续下一个
+                        if (nextSource === undefined || nextSource === null) {
+                            continue;
+                        }
+                        nextSource = Object(nextSource);
+
+                        // 获取改参数的所有key值，并遍历
+                        var keysArray = Object.keys(nextSource);
+                        for (var nextIndex = 0, len = keysArray.length; nextIndex < len; nextIndex++) {
+                            var nextKey = keysArray[nextIndex];
+                            var desc = Object.getOwnPropertyDescriptor(nextSource, nextKey);
+                            // 如果不为空且可枚举，则直接浅拷贝赋值
+                            if (desc !== undefined && desc.enumerable) {
+                                to[nextKey] = nextSource[nextKey];
+                            }
+                        }
+                    }
+                    return to;
+                }
+            });
+        }
+    },
+    /**
+     * 添加HTML layout-scroll-fixed，解决有弹框弹出时，后面页面能够滚动的问题
+     * @param  {[type]} type [description]
+     * @return {[type]}      [description]
+     */
+    htmlLock: function(type) {
+        var html = document.querySelector('html');
+        var cls = 'layout-scroll-fixed';
+        if (type === '1') {
+            this.addClass(html, cls);
+        } else if (type === '0') {
+            this.removeClass(html, cls);
+        }
     }
 }
