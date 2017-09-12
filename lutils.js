@@ -222,49 +222,86 @@ var lutils = {
      * @return {[type]}       [description]
      */
     getDeltaAge: function(birth, end) {
-            //格式化时间，IOS下 - - bug
-            if (/\d{4}-\d{2}-\d{2}/.test(birth)) {
-                birth = birth.replace(/\-/g, "/");
-            }
-            if (/\d{4}-\d{2}-\d{2}/.test(end)) {
-                end = end.replace(/\-/g, "/");
-            }
-            birth = new Date(birth);
-            end = new Date(end);
-            var deltaYear, deltaMonth, deltaDate, psgType;
-            var startDate = birth.getDate();
-            var startMonth = birth.getMonth();
-            var startYear = birth.getFullYear();
-            var endDate = end.getDate();
-            var endMonth = end.getMonth();
-            var endYear = end.getFullYear();
-            //总的月份差
-            var monthDelta = (endYear * 12 + endMonth) - (startYear * 12 + startMonth);
-            var dayDelta = endDate - startDate;
-            if (dayDelta < 0) {
-                monthDelta = monthDelta - 1;
-                deltaDate = dayDelta + 30;
-            } else {
-                deltaDate = dayDelta;
-            }
+        //格式化时间，IOS下 - - bug
+        if (/\d{4}-\d{2}-\d{2}/.test(birth)) {
+            birth = birth.replace(/\-/g, "/");
+        }
+        if (/\d{4}-\d{2}-\d{2}/.test(end)) {
+            end = end.replace(/\-/g, "/");
+        }
+        birth = new Date(birth);
+        end = new Date(end);
+        var deltaYear, deltaMonth, deltaDate, psgType;
+        var startDate = birth.getDate();
+        var startMonth = birth.getMonth();
+        var startYear = birth.getFullYear();
+        var endDate = end.getDate();
+        var endMonth = end.getMonth();
+        var endYear = end.getFullYear();
+        //总的月份差
+        var monthDelta = (endYear * 12 + endMonth) - (startYear * 12 + startMonth);
+        var dayDelta = endDate - startDate;
+        if (dayDelta < 0) {
+            monthDelta = monthDelta - 1;
+            deltaDate = dayDelta + 30;
+        } else {
+            deltaDate = dayDelta;
+        }
 
-            deltaYear = Math.floor(monthDelta / 12);
-            deltaMonth = monthDelta - deltaYear * 12;
+        deltaYear = Math.floor(monthDelta / 12);
+        deltaMonth = monthDelta - deltaYear * 12;
 
-            if (deltaYear > 12) {
-                psgType = 'ADT';
-            } else if (deltaYear >= 2 && deltaYear <= 12) {
-                psgType = 'CHD'
-            } else if (deltaYear < 2) {
-                psgType = 'INF'
-            }
+        if (deltaYear > 12) {
+            psgType = 'ADT';
+        } else if (deltaYear >= 2 && deltaYear <= 12) {
+            psgType = 'CHD'
+        } else if (deltaYear < 2) {
+            psgType = 'INF'
+        }
 
 
-            return {
-                year: deltaYear || 0,
-                month: deltaMonth || 0,
-                date: deltaDate || 0,
-                psgType: psgType || 'ADT'
-            }
-        },
+        return {
+            year: deltaYear || 0,
+            month: deltaMonth || 0,
+            date: deltaDate || 0,
+            psgType: psgType || 'ADT'
+        }
+    },
+    /**
+     * 通过身份证获取生日
+     * @param  {[type]} id [身份证号]
+     * @return {[type]}    [description]
+     */
+    getBirthById: function(id) {
+        return id.substring(6, 10) + "-" + id.substring(10, 12) + "-" + id.substring(12, 14);
+    },
+    /**
+     * 判断是否有某个class
+     * @param  {[type]}  obj [description]
+     * @param  {[type]}  cls [description]
+     * @return {Boolean}     [description]
+     */
+    hasClass: function(obj, cls) {
+        return obj.className.match(new RegExp('(\\s|^)' + cls + '(\\s|$)'));
+    },
+    /**
+     * 添加class
+     * @param {[type]} obj [description]
+     * @param {[type]} cls [description]
+     */
+    addClass: function(obj, cls) {
+        if (!this.hasClass(obj, cls)) obj.className += " " + cls;
+    },
+    /**
+     * 删除class
+     * @param  {[type]} obj [description]
+     * @param  {[type]} cls [description]
+     * @return {[type]}     [description]
+     */
+    removeClass: function(obj, cls) {
+        if (this.hasClass(obj, cls)) {
+            var reg = new RegExp('(\\s|^)' + cls + '(\\s|$)');
+            obj.className = obj.className.replace(reg, ' ');
+        }
+    }
 }
