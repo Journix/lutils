@@ -27,3 +27,9 @@
 6.getDeltaAge
 
 计算年龄函数
+
+7.class Functions
+
+hasClass: 判断是否含有某个class名
+addClass: 添加class
+removeClass: 删除class
