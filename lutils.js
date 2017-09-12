@@ -214,5 +214,57 @@ var lutils = {
         } else if (type === '0') {
             this.removeClass(html, cls);
         }
-    }
+    },
+    /**
+     * 计算年龄
+     * @param  {[type]} birth [description]
+     * @param  {[type]} end   [description]
+     * @return {[type]}       [description]
+     */
+    getDeltaAge: function(birth, end) {
+            //格式化时间，IOS下 - - bug
+            if (/\d{4}-\d{2}-\d{2}/.test(birth)) {
+                birth = birth.replace(/\-/g, "/");
+            }
+            if (/\d{4}-\d{2}-\d{2}/.test(end)) {
+                end = end.replace(/\-/g, "/");
+            }
+            birth = new Date(birth);
+            end = new Date(end);
+            var deltaYear, deltaMonth, deltaDate, psgType;
+            var startDate = birth.getDate();
+            var startMonth = birth.getMonth();
+            var startYear = birth.getFullYear();
+            var endDate = end.getDate();
+            var endMonth = end.getMonth();
+            var endYear = end.getFullYear();
+            //总的月份差
+            var monthDelta = (endYear * 12 + endMonth) - (startYear * 12 + startMonth);
+            var dayDelta = endDate - startDate;
+            if (dayDelta < 0) {
+                monthDelta = monthDelta - 1;
+                deltaDate = dayDelta + 30;
+            } else {
+                deltaDate = dayDelta;
+            }
+
+            deltaYear = Math.floor(monthDelta / 12);
+            deltaMonth = monthDelta - deltaYear * 12;
+
+            if (deltaYear > 12) {
+                psgType = 'ADT';
+            } else if (deltaYear >= 2 && deltaYear <= 12) {
+                psgType = 'CHD'
+            } else if (deltaYear < 2) {
+                psgType = 'INF'
+            }
+
+
+            return {
+                year: deltaYear || 0,
+                month: deltaMonth || 0,
+                date: deltaDate || 0,
+                psgType: psgType || 'ADT'
+            }
+        },
 }
