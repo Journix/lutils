@@ -33,3 +33,7 @@
 hasClass: 判断是否含有某个class名
 addClass: 添加class
 removeClass: 删除class
+
+8.isMweb
+
+判断是否为M站

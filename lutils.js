@@ -303,5 +303,23 @@ var lutils = {
             var reg = new RegExp('(\\s|^)' + cls + '(\\s|$)');
             obj.className = obj.className.replace(reg, ' ');
         }
+    },
+    /**
+     * 通过ua判断是不是m站
+     */
+    isMweb: function () {
+        var userAgentInfo = navigator.userAgent;
+        var Agents = ["Android", "iPhone",
+            "SymbianOS", "Windows Phone",
+            "iPad", "iPod"
+        ];
+        var isM = false;
+        for (var v = 0; v < Agents.length; v++) {
+            if (userAgentInfo.indexOf(Agents[v]) > 0) {
+                isM = true;
+                break;
+            }
+        }
+        return isM;
     }
 }
