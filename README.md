@@ -37,3 +37,7 @@ removeClass: 删除class
 8.isMweb
 
 判断是否为M站
+
+9.getCookie
+
+获取cookie值

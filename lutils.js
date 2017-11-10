@@ -208,11 +208,14 @@ var lutils = {
      */
     htmlLock: function(type) {
         var html = document.querySelector('html');
+        var body = document.querySelector('boby'); // 有时候，只是锁定html，无法达到效果，所以同时锁定body
         var cls = 'layout-scroll-fixed';
         if (type === '1') {
             this.addClass(html, cls);
+            this.addClass(body, cls);
         } else if (type === '0') {
             this.removeClass(html, cls);
+            this.removeClass(body, cls);
         }
     },
     /**
@@ -321,5 +324,22 @@ var lutils = {
             }
         }
         return isM;
+    },
+    /**
+     * 获取cookie值
+     * @param  {[type]} name [需要获取的cookie的key值]
+     * @return {[type]}      [description]
+     */
+    getCookie: function (name) {
+        var arr = document.cookie.split('; '),
+            len = arr.length;
+
+        for (var i = 0; i < len; i++) {
+            var arr2 = arr[i].split('=');
+            if (arr2[0] == name) {
+                return decodeURIComponent(arr2[1]);
+            }
+        }
+        return null;
     }
 }
