@@ -35,3 +35,4 @@
 - trimRound(string): 去掉前后空格
 - trimAll(string): 去掉所有空格
 - getCookie(name): 获取cookie值
+- reverseString: 翻转文本

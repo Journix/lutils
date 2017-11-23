@@ -394,5 +394,13 @@ var lutils = {
             }
         }
         return null;
+    },
+    /**
+     * 翻转文本
+     * @param  {[type]} string [description]
+     * @return {[type]}        [description]
+     */
+    reverseString: function (string) {
+        return string.split('').reverse().join('')
     }
 }
