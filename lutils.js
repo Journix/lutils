@@ -9,11 +9,11 @@ var lutils = {
      * @param  {[type]} arr [description]
      * @return {[type]}     [description]
      */
-    sort1: function(arr) {
-        var a = array.filter(function(ele, index) {
-            return index === array.indexOf(ele);
-        })
-    },
+    // sort1: function(arr) {
+    //     var a = arr.filter(function(ele, index) {
+    //         return index === arr.indexOf(ele);
+    //     })
+    // },
     /**
      * 效率最高的排序方式
      * @param  {[type]} arr [description]
@@ -284,7 +284,10 @@ var lutils = {
      * @param  {[type]}  cls [description]
      * @return {Boolean}     [description]
      */
-    hasClass: function(obj, cls) {
+    hasClass: function (obj, cls) {
+        return obj.classList.contains('cls')
+    },
+    hasClass1: function(obj, cls) {
         return obj.className.match(new RegExp('(\\s|^)' + cls + '(\\s|$)'));
     },
     /**
@@ -324,6 +327,56 @@ var lutils = {
             }
         }
         return isM;
+    },
+    /**
+     * 拓展array indexof方法
+     * @return {[type]} [description]
+     */
+    arrayIndexof: function () {
+        if (!Array.prototype.indexOf) {
+            Array.prototype.indexOf = function (elt) {
+                var len = this.length >>> 0;
+                var from = Number(arguments[1]) || 0;
+                from = (from < 0) ? Math.ceil(from) : Math.floor(from);
+                if (from < 0) from += len;
+                for (; from < len; from++) {
+                    if (from in this && this[from] === elt) return from;
+                }
+                return -1;
+            };
+        };
+    },
+    /**
+     * 去掉左边空格
+     * @param  {[type]} string [description]
+     * @return {[type]}        [description]
+     */
+    trimLeft: function (string) {
+        return string.replace(/^\s*/g,"");
+    },
+    /**
+     * 去掉右边空格
+     * @param  {[type]} string [description]
+     * @return {[type]}        [description]
+     */
+    trimRight: function (string) {
+        return string.replace(/\s*$/g,"");
+    },
+    /**
+     * 去掉前后空格
+     * @param  {[type]} string [description]
+     * @return {[type]}        [description]
+     */
+    trimRound: function (string) {
+        return string.replace(/(^\s*)|(\s*$)/g,"")
+    },
+    /**
+     * 去掉所有空格
+     * @param  {[type]} string [description]
+     * @return {[type]}        [description]
+     */
+    trimAll: function (string) {
+        return name.replace(/\s+/g,"")
     },
     /**
      * 获取cookie值
