@@ -36,3 +36,4 @@
 - trimAll(string): 去掉所有空格
 - getCookie(name): 获取cookie值
 - reverseString: 翻转文本
+- getDateAbb: 6位日期缩写，如：180108

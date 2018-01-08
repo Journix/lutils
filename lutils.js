@@ -402,5 +402,18 @@ var lutils = {
      */
     reverseString: function (string) {
         return string.split('').reverse().join('')
+    },
+    /**
+     * 6位日期缩写：180108
+     */
+    getDateAbb: function () {
+        return (time.getFullYear() + '').substring(2,4) + (time.getMonth() + 1 + '').padStart(2, '0') + (time.getDate() + '').padStart(2, '0')
+    },
+    /**
+     * 双重非运算操作符，代替Math.floor()，其优势在于运行更快
+     * @return {[type]} [description]
+     */
+    mathFloor: function (num) {
+        return ~~num;
     }
 }
