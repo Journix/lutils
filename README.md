@@ -14,6 +14,7 @@
         - 1 英文 d|h|m|s
 - isObjHasAssign: 判断object是否拥有assign方法，如果不存在，就拓展该方法
 - htmlLock(type): 为html添加layout-scroll-fixed类名，同时添加
+- unorderArr: 传入一个数组，返回一个打乱顺序的数组
 ```
 .layout-scroll-fixed{
     height: 100%;
@@ -35,3 +36,8 @@
 - getCookie(name): 获取cookie值
 - reverseString: 翻转文本
 - getDateAbb: 6位日期缩写，如：180108
+
+
+base64转文件，axios上传文件（适用于裁剪头像上传）
+
+    代码片段在`./gist/base64toBob&AxiosUploadFile.js`
