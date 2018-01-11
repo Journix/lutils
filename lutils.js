@@ -94,8 +94,9 @@ var lutils = {
      * @return {[type]}     [description]
      */
     randomSort: function (arr) {
-        return arr.sort(function(){
-            return Math.random() - 0.5
+        let narr = arr.concat();
+        return narr.sort(function(){
+            return Math.random() - 0.5  // or  0.5-Math.random()
         });
     },
     /**
@@ -415,17 +416,6 @@ var lutils = {
      */
     mathFloor: function (num) {
         return ~~num;
-    },
-    /**
-     * 返回打乱的数组
-     * @param  {Array} 输入一个数组
-     * @return {Array} 返回一个乱序数组
-     */
-    unorderArr:function (arr){
-      let carr = arr.concat();
-      carr.sort(function(x,y){
-        return 0.5-Math.random()
-      })
-      return carr
     }
+
 }
