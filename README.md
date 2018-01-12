@@ -37,7 +37,8 @@
 - reverseString: 翻转文本
 - getDateAbb: 6位日期缩写，如：180108
 
+## gist
 
-base64转文件，axios上传文件（适用于裁剪头像上传）
+- base64toBob&AxiosUploadFile.js: base64转文件，axios上传文件（适用于裁剪头像上传）
 
-    代码片段在`./gist/base64toBob&AxiosUploadFile.js`
+- header.html: html head 部分解析及最佳实践

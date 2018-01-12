@@ -7,7 +7,41 @@
 <body>
     <script src="./lutils.js"></script>
     <script>
+		var prison = (function () {
+			var prisoner = 'J';
 
+            return {
+                prisoner: function () {
+                    return prisoner;
+                }
+            }
+		})();
+
+        console.log( prison.prisoner() )
+        console.log( prison.prisoner() )
+        console.log( prison.prisoner() )
+
+        var makePrison = function (prisoner) {
+            return function () {
+                return prisoner;
+            }
+        }
+        var joshPrison = makePrison('j');
+        console.log(joshPrison())
+
+
+        var menu, outer_function ,food = 'cake';
+        outer_function = function () {
+            var fruitc = 'apple';
+            return function () {
+                return {
+                    food,
+                    fruit
+                }
+            }
+        }
+        menu = outer_function();
+        console.log(menu());
     </script>
 </body>
 </html>
