@@ -159,6 +159,47 @@ var lutils = {
         return format;
     },
     /**
+     * 时间处理函数
+     * @param  {[type]} date ["2017-09-18 04:13:14"]
+     * @return {[type]}      [description]
+     */
+    handleTime: function (date) {
+        // 0:01-5:00凌晨 5:01-12:00上午 12:01-21:00下午 21:01-24:00夜晚
+        let newDate = date.split(" ");
+        let day = newDate[0];
+        let time = newDate[1];
+        let baseTime = new Date(date).getTime();
+        let timeDuration = [{
+            start: "00:01:00",
+            end: "05:00:59",
+            chinese: "凌晨"
+        },{
+            start: "05:01:00",
+            end: "12:00:59",
+            chinese: "上午"
+        },{
+            start: "12:00:00",
+            end: "21:00:59",
+            chinese: "下午"
+        },{
+            start: "21:01:00",
+            end: "24:00:00",
+            chinese: "夜晚"
+        }]
+        for (var i = 0; i < timeDuration.length; i++) {
+            let item = timeDuration[i];
+            let timeStart = new Date(day + " " + item.start).getTime();
+            let timeEnd = new Date(day + " " + item.end).getTime();
+            if (baseTime >= timeStart && baseTime <= timeEnd) {
+                return {
+                    day,
+                    time,
+                    timeDurationCH: item.chinese
+                }
+            }
+        }
+    },
+    /**
      * 判断object是否拥有assign方法，如果不存在，就拓展该方法
      * @return {Boolean} [description]
      */
@@ -416,6 +457,27 @@ var lutils = {
      */
     mathFloor: function (num) {
         return ~~num;
-    }
+    },
+    /**
+     * loading 进度 下面的延时计时器模拟ajax请求
+     * @return {[type]} [description]
+     */
+    loadingProcess: function () {
+        let timer = window.setInterval(() => {
+            if (this.prg >= 100) {
+                // 到达终点，关闭定时器
+                window.clearInterval(timer);
+                this.prg = 100;
+            } else {  // 未到终点，进度自增
+                if(!(this.prg == 95 && !this.ajaxtrue)) {
+                    this.prg += 5;
+                }
+            }
+            console.log(this.prg,'prg')
+        }, 100);
 
+        // window.setTimeout(() => {
+        //     this.ajaxtrue = true;
+        // }, 10000)
+    }
 }

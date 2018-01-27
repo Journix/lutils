@@ -6,12 +6,17 @@
 - selectionSort: 选择排序
 - insertionSort: 插入排序
 - randomSort: 随机排序
+
 - formatTime(time, type, lan): 时间转换函数 (例： 3600s --> 1h 或 1小时)
     - time 需要转换的时间值
     - type 传入的时间类型，接受ms|s|m|h
     - lan 输出语言形式
         - 0 中文 天|小时|分|秒
         - 1 英文 d|h|m|s
+
+- handleTime
+    - date 入参格式为"2017-09-18 04:13:14"，可判断时间段
+
 - isObjHasAssign: 判断object是否拥有assign方法，如果不存在，就拓展该方法
 - htmlLock(type): 为html添加layout-scroll-fixed类名，同时添加
 - unorderArr: 传入一个数组，返回一个打乱顺序的数组
@@ -36,6 +41,8 @@
 - getCookie(name): 获取cookie值
 - reverseString: 翻转文本
 - getDateAbb: 6位日期缩写，如：180108
+
+- loadingProcess: loading百分比进度
 
 ## gist
 
