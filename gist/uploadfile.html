@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>upload file</title>
+</head>
+<body>
+    <div class="inputs card-up">
+           <input type="file" class="hide" id="upFile" name="upFile" id="upFile" capture="camera" accept="image/*" v-on:click="getPhoto">
+           <label for="upFile" class="upload-file"  v-on:click="getPhoto"></label>
+    </div>
+</body>
+<script>
+    $('#upFile').on('change',function(eve){
+      var reader = new FileReader();
+      var files = eve.target.files;
+      var imgFile = files[0];
+      reader.readAsDataURL(imgFile);
+      reader.onload = function(e){
+      var imgSrc = this.result;
+     $.ajax({
+            url: '',
+            dataType: 'json',
+            type: 'POST',
+           data: JSON.stringify({
+           'tel': self.$data.telValue,
+            'score': self.$data.scoreValue,
+            'picData': imgSrc
+        }),
+       success: function (resp) {
+             self.$data.imgFlag = true;
+       },
+       error: function () {
+           dialog.tip("网络错误，请稍后再试");
+       }
+
+    })
+</script>
+</html>
