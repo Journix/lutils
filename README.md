@@ -44,6 +44,8 @@
 
 - loadingProcess: loading百分比进度
 
+- 各种实现数组降维的方法
+
 ## gist
 
 - base64toBob&AxiosUploadFile.js: base64转文件，axios上传文件（适用于裁剪头像上传）

@@ -479,5 +479,77 @@ var lutils = {
         // window.setTimeout(() => {
         //     this.ajaxtrue = true;
         // }, 10000)
+    },
+    /**
+     * 二维数组转为一维数组
+     * 数组循环的方式
+     * @type {[type]}
+     */
+    arrayTile1: function (arr) {
+        var reduced = [];
+        for (var i = 0; i < arr.length; i++) {
+            for (var j = 0; j < arr[i].length; j++) {
+                reduced.push(arr[i][j]);
+            }
+        }
+        return reduced;
+    },
+    /**
+     * 二维数组转为一维数组
+     * concat的方式
+     * @type {[type]}
+     */
+    arrayTile2: function (arr) {
+        var reduced = [];
+        for (var i = 0; i < arr.length; i++){
+            reduced = reduced.concat(arr[i]);
+        }
+        return reduced;
+    },
+    /**
+     * 二维数组转为一维数组
+     * @type {[type]}
+     */
+    arrayTile: function (arr) {
+        // const arr=[[1,2,3],[3,4],[5]];
+        return [].concat.apply([],arr);
+        // return Array.prototype.concat.apply([], arr)
+    },
+    /**
+     * [arrayTile3 description]
+     * @param  {[type]} arr [description]
+     * @return {[type]}     [description]
+     */
+    arrayTile3: function (arr) {
+        // var arr1 = (arr + '').split(',');//将数组转字符串后再以逗号分隔转为数组
+        var arr1 = arr.toString().split(',');//将数组转字符串后再以逗号分隔转为数组
+        var arr2 = arr1.map(function(x){
+            return Number(x);
+        });
+        return arr2;
+    },
+    /**
+     * 使用递归来把多维数组转为一维数组
+     * @param  {[type]} arr [description]
+     * @return {[type]}     [description]
+     */
+    arrayTile4: function (arr) {
+        for(var i=0;i<arr.length;i++){
+            if(Array.isArray(arr[i])){
+                arrayTile4(arr[i]);
+            }else{
+                newArr.push(arr[i]);
+            }
+        }
+    },
+    /**
+     * 多维数组转为一维数组
+     * 递归 + reduce
+     * @return {[type]} [description]
+     */
+    arrayTile5: function () {
+        arr.reduce(
+            (acc,val) => acc.concat(Array.isArray(val)? arrayTile5(val):val),[]
+        )
     }
 }
