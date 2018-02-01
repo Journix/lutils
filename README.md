@@ -48,6 +48,11 @@
 
 ## gist
 
-- base64toBob&AxiosUploadFile.js: base64转文件，axios上传文件（适用于裁剪头像上传）
+- base64toBob&AxiosUploadFile.js
+    - base64转文件，axios上传文件（适用于裁剪头像上传）
 
-- header.html: html head 部分解析及最佳实践
+- header.html
+    - html head 部分解析及最佳实践
+
+- uploadfile.html
+    - 用fileReader上传文件
