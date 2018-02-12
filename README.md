@@ -46,6 +46,8 @@
 
 - 各种实现数组降维的方法
 
+- 获取链接里面的参数
+
 ## gist
 
 - base64toBob&AxiosUploadFile.js
