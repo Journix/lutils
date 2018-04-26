@@ -159,6 +159,48 @@ var lutils = {
         return format;
     },
     /**
+     * 日期格式化函数
+     * @param  {[type]} t [description]
+     * @param  {[type]} f [description]
+     * @return {[type]}   [description]
+     */
+    formatDate (t, f) {
+        if (f == undefined) {
+            f = "yyyy-mm-dd";
+        }
+
+        if (t == "" || t == undefined || t == "yyyy-mm-dd" || t == "yyyy/mm/dd" || t == "mm-dd-yyyy" || t == "mm/dd/yyyy") {
+            return "";
+        } else {
+            t = new Date(t.replace(/-/g, "/"));
+            var n = (/d{1,4}|m{1,4}|yy(?:yy)?|([HhMsTt])\1?|"[^"]*"|'[^']*'/g),
+            i = t.getDate(),
+            s = function (x, e) { for (x += "", e = e || 2; x.length < e;) x = "0" + x; return x; },
+            r = (t.getDay(), t.getMonth()),
+            o = t.getFullYear(),
+            c = t.getHours(),
+            d = t.getMinutes(),
+            h = t.getSeconds(),
+            l = t.getTime(),
+            p = {
+                d: i,
+                dd: s(i),
+                m: r + 1,
+                mm: s(r + 1),
+                yy: String(o).slice(2),
+                yyyy: o,
+                H: c,
+                M: d,
+                S: h,
+                L: s(l, 3)
+            };
+            return f.replace(n,
+            function (t) {
+                return (t in p ? p[t] : t.slice(1, t.length - 1))
+            })
+        }
+    },
+    /**
      * 时间处理函数
      * @param  {[type]} date ["2017-09-18 04:13:14"]
      * @return {[type]}      [description]
@@ -556,7 +598,7 @@ var lutils = {
      * 获取链接里面的参数
      * @param {[type]} param [description]
      */
-    GetQueryString: function (param) { //param为要获取的参数名 注:获取不到是为null
+    GetQueryString(param) { //param为要获取的参数名 注:获取不到是为null
         var currentUrl = window.location.href; //获取当前链接
         var arr = currentUrl.split("?");//分割域名和参数界限
         if (arr.length > 1) {
@@ -572,5 +614,28 @@ var lutils = {
         else {
             return null;
         }
-    }
+    },
+    /**
+     * 数值交换， 使用数组解构
+     * @param  {[type]} a [description]
+     * @param  {[type]} b [description]
+     * @return {[type]}   [description]
+     */
+    exchangeParam(a, b) {
+        [a, b] = [b, a];
+    },
+    /**
+     * 时间换算成分钟
+     * @param {[type]} str [description]
+     */
+    timeToMin(str) {
+        if (str == "--:--" || str == "") { return 0; }
+        var t = str.split(":");
+        for (var i = 0; i < 2; i++) {
+            if (t[i].length == 2 && t[i].substring(0, 1) == "0") {
+                t[i] = t[i].substring(1);
+            }
+        }
+        return parseInt(t[0]) * 60 + parseInt(t[1]);
+    },
 }

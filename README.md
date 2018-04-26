@@ -14,12 +14,14 @@
         - 0 中文 天|小时|分|秒
         - 1 英文 d|h|m|s
 
+- formatDate: 格式化日期
+
 - handleTime
     - date 入参格式为"2017-09-18 04:13:14"，可判断时间段
 
 - isObjHasAssign: 判断object是否拥有assign方法，如果不存在，就拓展该方法
+
 - htmlLock(type): 为html添加layout-scroll-fixed类名，同时添加
-- unorderArr: 传入一个数组，返回一个打乱顺序的数组
 ```
 .layout-scroll-fixed{
     height: 100%;
@@ -27,6 +29,9 @@
 }
 ```
 样式，以解决有弹框弹出，页面后面仍可以滑动的问题，或者处理特定此类需求。
+
+- unorderArr: 传入一个数组，返回一个打乱顺序的数组
+
 - getDeltaAge(birth, end): 计算年龄函数
 - getBirthById(id): 通过身份证获取生日
 - hasClass(obj, cls): 判断是否有某个class名
@@ -46,7 +51,11 @@
 
 - 各种实现数组降维的方法
 
-- 获取链接里面的参数
+- GetQueryString: 获取链接里面的参数
+
+- exchangeParam: 数值交换
+
+- timeToMin: 时间转换为分钟
 
 ## gist
 
