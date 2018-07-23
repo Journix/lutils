@@ -638,4 +638,53 @@ var lutils = {
         }
         return parseInt(t[0]) * 60 + parseInt(t[1]);
     },
+    /**
+     * 时间换算成整数
+     * @param  {[type]} time [description]
+     * @return {[type]}      [description]
+     */
+    timeToInt(time) {
+        if (typeof (time) == "string") {
+            time = time.replace(":", "");
+            var r = parseInt(time);
+            return !!r ? r : 0;
+        }
+        return 0;
+    },
+    animatedScrollTop(targetY=0) {
+
+        function animatedScroll(){
+          const currentY = document.documentElement.scrollTop || document.body.scrollTop;
+          // 目前只满足了置顶的条件
+          if (currentY > targetY) {
+            window.scrollTo(0, currentY - currentY / 5);
+            window.requestAnimationFrame(animatedScroll);
+          }
+
+          // const step = 5;
+          // if (targetY > currentY) { //targetY > currentY 即向下滚动
+          //   let dist = Math.ceil((targetY - currentY) / step);
+          //   let nextY = currentY + dist;
+          //   if (nextY < targetY) { //向上滚动和向下滚动判定的区别 是这里！！
+          //     window.scrollTo(0, nextY);
+          //   } else {
+          //     window.scrollTo(0, targetY);
+          //   }
+          //   window.requestAnimationFrame(animatedScroll);
+          // } else if (targetY < currentY) { //targetY < currentY 即向上滚动
+          //   let dist = Math.ceil((targetY - currentY) / step);
+          //   let nextY = currentY + dist;
+          //   if (nextY > targetY) {
+          //     window.scrollTo(0, nextY);
+          //   } else {
+          //     window.scrollTo(0, targetY);
+          //   }
+          //   window.requestAnimationFrame(animatedScroll);
+          // } else {
+          //   window.cancelAnimationFrame(animatedScroll);
+          // }
+        }
+
+        window.requestAnimationFrame(animatedScroll);
+    }
 }
