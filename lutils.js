@@ -686,5 +686,26 @@ var lutils = {
         }
 
         window.requestAnimationFrame(animatedScroll);
+    }, 
+    toLowerFirst(req) {
+        if (Object.prototype.toString.call(req) === "[object Array]") {
+            req.forEach(item => {
+              toLowerFirst(item)
+            })
+          } else if (Object.prototype.toString.call(req) === "[object Object]"){
+            Object.keys(req).forEach(key => {
+              if (typeof req[key] === "object") {
+                let newKey = _.lowerFirst(key);
+                req[newKey] = toLowerFirst(req[key]);
+                delete req[key];
+              } else {
+                let newKey = _.lowerFirst(key);
+                req[newKey] = req[key];
+                delete req[key];
+              }
+            })
+          }
+          return req;
     }
+        
 }
