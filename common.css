@@ -1,0 +1,37 @@
+/* 单行文本 */
+.ellipsis {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+/* 多行文本 */
+.ellipsis-mul {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  /* 将对象作为弹性弹性伸缩盒子模型展示 */
+  display: -webkit-box;
+  /* 用来限制在一个块元素显示的文本的行数 */
+  -webkit-line-clamp: 3;
+  /* 规定从上至下垂直排列子元素 */
+  -webkit-box-orient: vertical;
+}
+
+/* 跨浏览器兼容方案 */
+/* 要支持IE8，需要将::after替换成:after； */
+.ellipsis-common {
+  position:relative;
+  line-height:1.4em;
+  /* 3 times the line-height to show 3 lines */
+  height:4.2em;
+  overflow:hidden;
+}
+p::after {
+  content:"...";
+  font-weight:bold;
+  position:absolute;
+  bottom:0;
+  right:0;
+  padding:0 20px 1px 45px;
+}
+
